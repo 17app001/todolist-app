@@ -21,3 +21,10 @@
 
 ### 建立超級使用者
 - python manage.py createsuperuser
+
+### 建立網頁功能
+- python manage.py startapp user
+
+### 註冊功能
+- settings 
+    - INSTALLED_APP 進行新增
