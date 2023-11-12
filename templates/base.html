@@ -8,16 +8,57 @@
         {% block title %}
         {% endblock %}
     </title>
+    <style>
+        body {
+            margin: 0;
+            background-color: aliceblue;
+        }
+
+        #navbar {
+            background-color: darkblue;
+            color: white;
+            padding: 6px;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .title {
+            padding: 0px 16px;
+            padding-left: 8px;
+            font-size: 24px;
+            color: chartreuse
+        }
+
+        a {
+            padding: 0 12px;
+            text-decoration: none;
+            padding: 6px;
+        }
+
+        a:visited {
+            color: yellow;
+        }
+
+        .username {
+            border-radius: 3px;
+            color: aqua;
+            font-weight: bold;
+            padding-right: 12px;
+        }
+    </style>
 </head>
 
 <body>
-    {% if user.is_authenticated %}
-    {{user.username}} <a href="{% url 'logout' %}">登出</a>
-    {% else %}
-    <a href="{% url 'login' %}">登入</a>
-    <a href="{% url 'register' %}">註冊</a>
-    {% endif %}
-
+    <div id="navbar">
+        <span class="title">TodoList</span>
+        {% if user.is_authenticated %}
+        使用者:<span class="username"> {{user.username}} </span>
+        <a href="{% url 'logout' %}">登出</a>
+        {% else %}
+        <a href="{% url 'login' %}">登入</a>
+        <a href="{% url 'register' %}">註冊</a>
+        {% endif %}
+    </div>
     {% block content %}
 
 
