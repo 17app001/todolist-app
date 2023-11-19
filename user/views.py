@@ -66,6 +66,7 @@ def register(request):
                 user = User.objects.create_user(username=username, password=password1)
                 user.save()
                 message = "註冊成功!"
+                return redirect("login")
 
     form = UserCreationForm()
     return render(request, "user/register.html", {"form": form, "message": message})
