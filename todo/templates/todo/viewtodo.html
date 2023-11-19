@@ -3,12 +3,35 @@
 單一事項
 {% endblock %}
 {% block content %}
+{% block style %}
+<style>
+    .content {
+        background-color: white;
+        width: 300px;
+        height: 300px;
+        border-radius: 12px;
+        padding: 12px;
+        border: 1px solid black;
+        white-space: pre-line;
+    }
+</style>
+{% endblock %}
 <h1>ViewTodo</h1>
 <small>{{todo.created}}</small>
 <h2>{{todo.title}}</h2>
+{% if todo.completed %}
+完成時間:{{todo.date_completed}}
+{% endif %}<br>
 代辦內容:<br>
-<p>
+<p class="content">
     {{todo.text}}
 </p>
 <a href="{% url 'todo' %}"><u>返回列表</u></a>
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">更新</button>
+</form>
+{{message}}
 {% endblock %}
