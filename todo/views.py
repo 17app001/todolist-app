@@ -7,6 +7,16 @@ from datetime import datetime
 # Create your views here.
 
 
+def completedtodo(request):
+    todos = Todo.objects.all()
+
+    return render(request, "todo/completedtodo.html", {"todos": todos})
+
+
+def page404(request):
+    return render(request, "todo/404.html")
+
+
 @login_required
 def deletetodo(request, id):
     todo = Todo.objects.get(id=id)
