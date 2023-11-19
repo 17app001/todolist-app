@@ -44,7 +44,7 @@ def user_login(request):
                     # 使用者完成登入
                     login(request, user)
                     message = "登入成功!"
-                    return redirect("profile")
+                    return redirect("todo")
         print(user)
 
     return render(

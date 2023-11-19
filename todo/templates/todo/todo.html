@@ -4,13 +4,16 @@
 {% endblock %}
 {% block content %}
 <h1>TodoList</h1>
+{% if not todos %}
+<h3>目前無代辦事項，請先新增...</h3>
+{% else %}
 {% for todo in todos %}
 <ul>
     <li>
-        <h3>{{todo.title}}</h3>
+        <h3 {% if todo.important %}style="color:red" {% endif %}>{{todo.title}}</h3>
     </li>
     <li>{{todo.created}}</li>
 </ul>
-
 {% endfor %}
+{% endif %}
 {% endblock %}

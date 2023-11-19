@@ -62,7 +62,9 @@
             <a href="{% url 'todo' %}">TodoList</a>
         </span>
         {% if user.is_authenticated %}
-        使用者:<span class="username"> {{user.username}} </span>
+        使用者:<span class="username">
+            <a href="{% url 'profile' %}">{{user.username}} </a>
+        </span>
         <a href="{% url 'logout' %}">登出</a>
         {% else %}
         <a href="{% url 'login' %}">登入</a>
