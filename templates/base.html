@@ -49,12 +49,18 @@
             font-weight: bold;
             padding-right: 12px;
         }
+
+        #container {
+            padding: 12px;
+        }
     </style>
 </head>
 
 <body>
     <div id="navbar">
-        <span class="title">TodoList</span>
+        <span class="title">
+            <a href="{% url 'todo' %}">TodoList</a>
+        </span>
         {% if user.is_authenticated %}
         使用者:<span class="username"> {{user.username}} </span>
         <a href="{% url 'logout' %}">登出</a>
@@ -63,10 +69,12 @@
         <a href="{% url 'register' %}">註冊</a>
         {% endif %}
     </div>
-    {% block content %}
+    <div id="container">
+        {% block content %}
 
 
-    {% endblock %}
+        {% endblock %}
+    </div>
 </body>
 
 </html>

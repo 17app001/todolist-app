@@ -19,6 +19,13 @@ def profile(request):
 
 def user_login(request):
     message = ""
+    username = ""
+
+    if request.method == "GET":
+        if "username" in request.session:
+            username = request.session.get("username")
+            del request.session["username"]
+
     if request.method == "POST":
         if request.POST.get("register"):
             return redirect("register")
@@ -40,7 +47,9 @@ def user_login(request):
                     return redirect("profile")
         print(user)
 
-    return render(request, "user/login.html", {"message": message})
+    return render(
+        request, "user/login.html", {"message": message, "username": username}
+    )
 
 
 # Create your views here.
@@ -66,6 +75,7 @@ def register(request):
                 user = User.objects.create_user(username=username, password=password1)
                 user.save()
                 message = "註冊成功!"
+                request.session["username"] = username
                 return redirect("login")
 
     form = UserCreationForm()

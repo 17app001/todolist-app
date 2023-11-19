@@ -10,3 +10,6 @@ class Todo(models.Model):
     date_completed = models.DateTimeField(blank=True, null=True)
     important = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.id}-{self.title}-{self.created}({self.user.username})"

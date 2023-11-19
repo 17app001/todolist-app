@@ -4,4 +4,13 @@
 {% endblock %}
 {% block content %}
 <h1>TodoList</h1>
+{% for todo in todos %}
+<ul>
+    <li>
+        <h3>{{todo.title}}</h3>
+    </li>
+    <li>{{todo.created}}</li>
+</ul>
+
+{% endfor %}
 {% endblock %}
