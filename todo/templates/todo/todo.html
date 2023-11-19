@@ -10,7 +10,9 @@
 {% for todo in todos %}
 <ul>
     <li>
-        <h3 {% if todo.important %}style="color:red" {% endif %}>{{todo.title}}</h3>
+        <h3 {% if todo.important %}style="color:red" {% endif %}>
+            <a href="{% url 'viewtodo' todo.id %}"><u>{{todo.title}}</u></a>
+        </h3>
     </li>
     <li>{{todo.created}}</li>
 </ul>

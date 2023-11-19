@@ -10,6 +10,11 @@ from .models import Todo
 # 4.base.html 登入的username綁定profile
 
 
+def viewtodo(request, id):
+    todo = Todo.objects.get(id=id)
+    return render(request, "todo/viewtodo.html", {"todo": todo})
+
+
 def todo(request):
     user = request.user
     todos = None
