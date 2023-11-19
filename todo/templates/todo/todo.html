@@ -2,6 +2,14 @@
 {% block title %}
 代辦事項
 {% endblock %}
+{% block style %}
+<style>
+    .button {
+        background-color: burlywood;
+        font-size: 12px;
+    }
+</style>
+{% endblock %}
 {% block content %}
 <h1>TodoList</h1>
 {% if not todos %}
@@ -13,12 +21,14 @@
         <h3 {% if todo.important %}style="color:red" {% endif %}>
             <a href="{% url 'viewtodo' todo.id %}"><u>
                     {% if todo.completed %}
-                    <s> {{todo.title}}</s>
+                    <s>{{todo.title}}</s>
                     {% else %}
                     {{todo.title}}
                     {% endif %}
                 </u></a>
+            <a class="button" href="{% url 'deletetodo' todo.id %}">刪除</a>
         </h3>
+
     </li>
     <li>{{todo.created}}</li>
 </ul>
