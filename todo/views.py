@@ -1,13 +1,22 @@
 from django.shortcuts import render, HttpResponse
 from .models import Todo
+from .forms import TodoForm
 
 # Create your views here.
 
 
-# 1.登入成功=>首頁
-# 2.如果沒代辦事項==>提示"無代辦事項，請先建立"
-# 3.重要事項==>title改成紅色
-# 4.base.html 登入的username綁定profile
+def createtodo(request):
+    form = TodoForm()
+    message = ""
+    if request.method == "POST":
+        print(request.POST)
+        form = TodoForm(request.POST)
+        todo = form.save(commit=False)
+        todo.user = request.user
+        todo.save()
+        message = "建立todo成功!"
+
+    return render(request, "todo/createtodo.html", {"form": form, "message": message})
 
 
 def viewtodo(request, id):

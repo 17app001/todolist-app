@@ -36,7 +36,7 @@
         }
 
         a:visited {
-            color: black;
+            color: rgb(0, 0, 0);
         }
 
         a:link {
@@ -53,6 +53,11 @@
         #container {
             padding: 12px;
         }
+
+        .button {
+            background-color: rgb(241, 231, 250);
+            border-radius: 6px;
+        }
     </style>
 </head>
 
@@ -66,6 +71,7 @@
             <a href="{% url 'profile' %}">{{user.username}} </a>
         </span>
         <a href="{% url 'logout' %}">登出</a>
+        <a class="button" href="{% url 'createtodo' %}">建立事項</a>
         {% else %}
         <a href="{% url 'login' %}">登入</a>
         <a href="{% url 'register' %}">註冊</a>
