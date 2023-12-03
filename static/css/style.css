@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    background-color: aliceblue;
+}
+
+#navbar {
+    background-color: #4682b4;
+    color: white;
+    padding: 6px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.title {
+    padding: 0px 16px;
+    padding-left: 8px;
+    font-size: 24px;
+    color: chartreuse
+}
+
+a {
+    padding: 0 12px;
+    text-decoration: none;
+    padding: 6px;
+}
+
+a:visited {
+    color: rgb(0, 0, 0);
+}
+
+a:link {
+    color: black;
+}
+
+.username {
+    border-radius: 3px;
+    color: aqua;
+    font-weight: bold;
+    padding-right: 12px;
+}
+
+#container {
+    padding: 12px;
+}
+
+.button {
+    background-color: rgb(241, 231, 250);
+    border-radius: 6px;
+}

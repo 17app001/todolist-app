@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="zh-Hant">
 
@@ -8,81 +9,68 @@
         {% block title %}
         {% endblock %}
     </title>
-
-    <style>
-        body {
-            margin: 0;
-            background-color: aliceblue;
-        }
-
-        #navbar {
-            background-color: #4682b4;
-            color: white;
-            padding: 6px;
-            height: 40px;
-            line-height: 40px;
-        }
-
-        .title {
-            padding: 0px 16px;
-            padding-left: 8px;
-            font-size: 24px;
-            color: chartreuse
-        }
-
-        a {
-            padding: 0 12px;
-            text-decoration: none;
-            padding: 6px;
-        }
-
-        a:visited {
-            color: rgb(0, 0, 0);
-        }
-
-        a:link {
-            color: black;
-        }
-
-        .username {
-            border-radius: 3px;
-            color: aqua;
-            font-weight: bold;
-            padding-right: 12px;
-        }
-
-        #container {
-            padding: 12px;
-        }
-
-        .button {
-            background-color: rgb(241, 231, 250);
-            border-radius: 6px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     {% block style %}
 
     {% endblock %}
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
 
 </head>
 
 <body>
-    <div id="navbar">
-        <span class="title">
-            <a href="{% url 'todo' %}">TodoList</a>
-        </span>
-        {% if user.is_authenticated %}
-        使用者:<span class="username">
-            <a href="{% url 'profile' %}">{{user.username}} </a>
-        </span>
-        <a href="{% url 'logout' %}">登出</a>
-        <a class="button" href="{% url 'createtodo' %}">建立事項</a>
-        <a class="button" href="{% url 'completedtodo' %}">已完成事項</a>
-        {% else %}
-        <a href="{% url 'login' %}">登入</a>
-        <a href="{% url 'register' %}">註冊</a>
-        {% endif %}
-    </div>
+    <nav class="navbar has-background-info" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'todo' %}">
+                <img src="{% static 'img/to-do-list.png' %}">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            {% if user.is_authenticated %}
+            <div class="navbar-start">
+                <a class="navbar-item has-text-white" href="{% url 'profile' %}">
+                    {{user.username}}
+                </a>
+                <a class="navbar-item has-text-danger" href="{% url 'logout' %}">
+                    Logout
+                </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        More
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="{% url 'createtodo' %}">
+                            Create
+                        </a>
+                        <a class="navbar-item" href="{% url 'completedtodo' %}">
+                            Completed
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary" href="{% url 'register' %}">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light" href="{% url 'login' %}">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
     <div id="container">
         {% block content %}
 
