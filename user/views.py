@@ -36,21 +36,26 @@ def user_login(request):
         elif request.POST.get("login"):
             username = request.POST["username"]
             password = request.POST["password"]
+            email = request.POST["email"]
             user = User.objects.filter(username=username)
             if not user:
                 message = "無此帳號"
             else:
-                # 進行驗證
-                user = authenticate(request, username=username, password=password)
-                if not user:
-                    message = "密碼錯誤!"
+                user = user[0]
+                if user.email != email:
+                    message = "Email不正確"
                 else:
-                    # 使用者完成登入
-                    login(request, user)
-                    message = "登入成功!"
-                    return redirect("todo")
-        print(user)
+                    # 進行驗證
+                    user = authenticate(request, username=username, password=password)
+                    if not user:
+                        message = "密碼錯誤!"
+                    else:
+                        # 使用者完成登入
+                        login(request, user)
+                        message = "登入成功!"
+                        return redirect("todo")
 
+            print(user)
     return render(
         request, "user/login.html", {"message": message, "username": username}
     )

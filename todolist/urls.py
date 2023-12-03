@@ -22,5 +22,5 @@ urlpatterns = [
     path("", include("todo.urls")),
     path("user/", include("user.urls")),
     path("admin/", admin.site.urls),
-    re_path(".*", page404),
+    # re_path(".*", page404),
 ]

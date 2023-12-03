@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-5zy9nlnw$e92u-=k#430stv4r6g*o)criz__#hi71^!y8*conx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*", "localhost"]
 
 
 # Application definition
@@ -86,11 +86,14 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "todolist",
-        "USER": "root",
-        "PASSWORD": "12345678",
-        "HOST": "127.0.0.1",
+        "USER": "aws_root",
+        "PASSWORD": "aws_root12345678",
+        "HOST": "database-1.cmkvdrhu5fx4.ap-northeast-1.rds.amazonaws.com",
         "PORT": "3306",
     }
+    # todolist
+    # aws_root
+    # aws_toot12345678
 }
 
 
