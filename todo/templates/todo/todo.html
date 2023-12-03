@@ -2,36 +2,53 @@
 {% block title %}
 代辦事項
 {% endblock %}
-{% block style %}
-<style>
-    .button {
-        background-color: burlywood;
-        font-size: 12px;
-    }
-</style>
-{% endblock %}
 {% block content %}
-<h1>TodoList</h1>
-{% if not todos %}
-<h3>目前無代辦事項，請先新增...</h3>
-{% else %}
-{% for todo in todos %}
-<ul>
-    <li>
-        <h3 {% if todo.important %}style="color:red" {% endif %}>
-            <a href="{% url 'viewtodo' todo.id %}"><u>
-                    {% if todo.completed %}
-                    <s>{{todo.title}}</s>
-                    {% else %}
-                    {{todo.title}}
-                    {% endif %}
-                </u></a>
-            <a class="button" href="{% url 'deletetodo' todo.id %}">刪除</a>
-        </h3>
+{% block style %}
 
-    </li>
-    <li>{{todo.created}}</li>
-</ul>
-{% endfor %}
-{% endif %}
+{% endblock %}
+
+<section class="hero is-info is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container">
+            {% if not todos %}
+            <h3>目前無代辦事項，請先新增...</h3>
+            {% else %}
+            <div class="columns is-multiline">
+                {% for todo in todos %}
+                <div class="column is-4">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title is-size-4">
+                                {% if todo.completed %}
+                                <s>{{todo.title}}</s>
+                                {% else %}
+                                {{todo.title}}
+                                {% endif %}
+                            </p>
+                            <p class="has-text-right pr-3 py-3 has-text-grey date">
+                                <small>{{todo.created}}</small>
+                            </p>
+                        </header>
+                        <div class="card-content has-text-centered">
+                            <div class="content has-text-danger ">
+                                {{todo.text}}
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="{% url 'viewtodo' todo.id %}"
+                                class="card-footer-item has-background-warning">View</a>
+                            <a href="{% url 'deletetodo' todo.id %}" class="card-footer-item has-background-danger"
+                                style="color:white" onclick="return confirm('確定刪除?')">Delete</a>
+                        </footer>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        {% endif %}
+    </div>
+    </div>
+</section>
+
 {% endblock %}

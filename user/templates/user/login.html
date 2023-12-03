@@ -11,31 +11,31 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero is-fullheight-with-navbar">
+<section class="hero is-info is-fullheight-with-navbar">
     <div class="hero-body">
         <div class="container">
             <div class="columns is-centered">
-                <div class="column is-6 has-text-centered">
+                <div class="column is-4 has-text-centered">
                     <p class="title mb-2">
                         Login
                     </p>
                 </div>
             </div>
             <div class="columns is-centered">
-                <div class="column is-6 has-text-centered">
-                    <form action="" class="box m-2 has-background-info" method="POST">
+                <div class="column is-4 has-text-centered">
+                    <form action="" class="box m-2" method="POST">
                         {% csrf_token %}
                         <div class="field">
-                            <label class="label" style="color:white" for="username">帳號:</label>
+                            <label class="label" for="username">帳號</label>
                             <input class="input" type="text" id="username" name="username" value="{{ username }}"
                                 required><br>
                         </div>
                         <div class="field">
-                            <label class="label" style="color:white" for="email">信箱:</label>
+                            <label class="label" for="email">信箱</label>
                             <input class="input" type="email" id="email" name="email" required><br>
                         </div>
                         <div class="field">
-                            <label class="label" style="color:white" for="password">密碼:</label>
+                            <label class="label" for="password">密碼</label>
                             <input class="input" type="password" id="password" name="password" required>
                         </div>
                         <div class="field">
