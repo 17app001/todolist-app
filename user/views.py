@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from .forms import NewUserForm
 
 
 @login_required
@@ -63,8 +64,9 @@ def register(request):
         username = request.POST["username"]
         password1 = request.POST["password1"]
         password2 = request.POST["password2"]
+        email = request.POST["email"]
 
-        print(username, password1, password2)
+        print(username, password1, password2, email)
         if password1 != password2:
             message = "兩次輸入密碼不相同"
         elif len(password1) < 8:
@@ -75,11 +77,13 @@ def register(request):
                 message = "帳號重複!"
             else:
                 # 建立使用者
-                user = User.objects.create_user(username=username, password=password1)
+                user = User.objects.create_user(
+                    username=username, password=password1, email=email
+                )
                 user.save()
                 message = "註冊成功!"
                 request.session["username"] = username
                 return redirect("login")
 
-    form = UserCreationForm()
+    form = NewUserForm()
     return render(request, "user/register.html", {"form": form, "message": message})
