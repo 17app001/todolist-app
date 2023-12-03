@@ -10,6 +10,7 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
     {% block style %}
 
     {% endblock %}
@@ -38,38 +39,32 @@
                 <a class="navbar-item has-text-white" href="{% url 'profile' %}">
                     {{user.username}}
                 </a>
-                <a class="navbar-item has-text-danger" href="{% url 'logout' %}">
+                <a class="navbar-item has-text-warning" href="{% url 'logout' %}">
                     Logout
                 </a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        More
+                <div class="buttons">
+                    <a class="navbar-item button is-primary" href="{% url 'createtodo' %}">
+                        Create
                     </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item" href="{% url 'createtodo' %}">
-                            Create
-                        </a>
-                        <a class="navbar-item" href="{% url 'completedtodo' %}">
-                            Completed
-                        </a>
+                    <a class="navbar-item button is-danger" href="{% url 'completedtodo' %}">
+                        Completed
+                    </a>
+                </div>
+                {% else %}
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-primary" href="{% url 'register' %}">
+                                <strong>Sign up</strong>
+                            </a>
+                            <a class="button is-light" href="{% url 'login' %}">
+                                Log in
+                            </a>
+                        </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
-            {% else %}
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-primary" href="{% url 'register' %}">
-                            <strong>Sign up</strong>
-                        </a>
-                        <a class="button is-light" href="{% url 'login' %}">
-                            Log in
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-        </div>
     </nav>
     <div id="container">
         {% block content %}
