@@ -15,13 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include, re_path
-from todo.views import page404
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path("api/", include("api.urls")),
-    path("", include("todo.urls")),
-    path("user/", include("user.urls")),
-    path("admin/", admin.site.urls),
-    # re_path(".*", page404),
+    path("todos/", views.todos_api, name="todos_api"),
 ]

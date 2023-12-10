@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "user.apps.UserConfig",
     "todo.apps.TodoConfig",
+    "api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -88,14 +89,15 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "todolist",
-        "USER": "aws_root",
-        "PASSWORD": "aws_root12345678",
-        "HOST": "database-1.cmkvdrhu5fx4.ap-northeast-1.rds.amazonaws.com",
+        "USER": "root",
+        "PASSWORD": "12345678",
+        "HOST": "127.0.0.1",
         "PORT": "3306",
     }
     # todolist
     # aws_root
     # aws_toot12345678
+    # HOST": "database-1.cmkvdrhu5fx4.ap-northeast-1.rds.amazonaws.com",
 }
 
 
