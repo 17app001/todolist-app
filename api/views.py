@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 from todo.models import Todo
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
 import json
 
 
@@ -15,6 +16,38 @@ def convert_date(date, format="%Y-%m-%d %H:%M:%S"):
     except Exception as e:
         print(e)
     return None
+
+
+@csrf_exempt
+def add_todo_api(request):
+    success = True
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            user = User.objects.get(username=data.get("user"))
+            todo = Todo.objects.create(
+                title=data.get("title"),
+                text=data.get("text"),
+                date_completed=data.get("date_completed"),
+                important=data.get("important"),
+                completed=data.get("completed"),
+                user=user,
+            )
+
+            message = {
+                "success": success,
+                "todo_id": todo.id,
+                "title": todo.title,
+                "username": user.username,
+            }
+
+        except Exception as e:
+            print(e)
+            success = False
+            message = {"success": success, "message": str(e)}
+
+        response_data = json.dumps(message, ensure_ascii=False)
+        return HttpResponse(response_data, content_type="application/json")
 
 
 # get/all/filter
