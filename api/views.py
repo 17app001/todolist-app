@@ -19,6 +19,65 @@ def convert_date(date, format="%Y-%m-%d %H:%M:%S"):
 
 
 @csrf_exempt
+def delete_todo_api(request, id):
+    success = True
+    if request.method == "DELETE":
+        try:
+            todo = Todo.objects.get(id=id)
+            todo.delete()
+
+            message = {
+                "success": success,
+                "todo_id": id,
+                "message": "刪除資料成功.",
+            }
+
+        except Exception as e:
+            print(e)
+            success = False
+            message = {"success": success, "message": str(e)}
+
+        response_data = json.dumps(message, ensure_ascii=False)
+        return HttpResponse(response_data, content_type="application/json")
+
+
+@csrf_exempt
+def update_todo_api(request, id):
+    success = True
+    if request.method == "PUT":
+        try:
+            data = json.loads(request.body)
+            todo = Todo.objects.get(id=id)
+            user = (
+                User.objects.get(username=data.get("user"))
+                if data.get("user")
+                else todo.user
+            )
+
+            todo.title = data.get("title", todo.title)
+            todo.text = data.get("text", todo.text)
+            todo.date_completed = data.get("date_completed", todo.date_completed)
+            todo.important = data.get("important", todo.important)
+            todo.completed = data.get("completed", todo.completed)
+            todo.user = user
+            todo.save()
+
+            message = {
+                "success": success,
+                "todo_id": todo.id,
+                "message": "更新資料成功.",
+            }
+
+        except Exception as e:
+            print(e)
+            success = False
+            message = {"success": success, "message": str(e)}
+
+        response_data = json.dumps(message, ensure_ascii=False)
+        return HttpResponse(response_data, content_type="application/json")
+
+
+@csrf_exempt
 def add_todo_api(request):
     success = True
     if request.method == "POST":
